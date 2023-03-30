@@ -1,11 +1,8 @@
 {
   "environments": {
     "test": {
-      "formation": {
-        "test": {
-          "quantity": 1,
-          "size": "standard-2x"
-        }
+      "scripts": {
+        "test": "nose test"
       }
     }
   }
