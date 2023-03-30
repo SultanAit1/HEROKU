@@ -2,10 +2,10 @@
   "environments": {
     "test": {
       "scripts": {
-        "test": "nose test",
+        "test": "python main.py",
         "formation": {
           "test": {
-            "quantity": 1,
+            "quantity": 2,
             "size": "standard-1x"
           }
       }
