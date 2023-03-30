@@ -1,11 +1,9 @@
-from aiogram import Bot, Dispatcher
-
-
-
-from handlers import client
-from config import dp
 import logging
+
 from aiogram.utils import executor
+
+from config import dp
+from handlers import client
 
 client.register_handlers_client(dp)
 
