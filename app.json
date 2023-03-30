@@ -1,17 +1,12 @@
 {
   "environments": {
-    "test": {
-      "scripts": {
-        "test": "Procfile",
-        "formation": {
-          "test": {
-            "quantity": 2,
-            "size": "standard-2x"
-          }
-        }
-      }
+    "test": "Procfile",
+    "formation": {
+      "quantity": 2,
+      "size": "standard-2x"
     }
   }
 }
+
 
 
