@@ -27,8 +27,8 @@ kyrg = InlineKeyboardButton(text='Каталог: Кыргызстан 🇰🇬 
 russia = InlineKeyboardButton(text='Каталог: Казахстан 🇰🇿 ', callback_data='russia', url='https://goo.su/uM5a2pT')
 kazax = InlineKeyboardButton(text='Каталог: Узбекистан 🇺🇿 ', callback_data='kazax', url="https://goo.su/lAzUR4B")
 uzb = InlineKeyboardButton(text='Каталог: Россия  🇷🇺 ', callback_data='uzb',url="https://goo.su/lqwJz3")
-url_markup.add(kyrg
-)
+url_markup.add(kyrg)
+
 url_markup.add(russia)
 url_markup.add(kazax)
 url_markup.add(uzb)
