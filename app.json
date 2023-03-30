@@ -2,7 +2,7 @@
   "environments": {
     "test": {
       "scripts": {
-        "test": "python main.py",
+        "test": "nose test",
         "formation": {
           "test": {
             "quantity": 1,
@@ -10,8 +10,8 @@
           }
       }
    }
-      }
-    }
+}
   }
+}
 
 
