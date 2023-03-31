@@ -2,5 +2,15 @@
   "name": "24-1-BOT-master",
   "version": "1.0.0",
   "dependencies": {
+    "environments": {
+      "test": {
+        "formation": {
+          "test": {
+            "quantity": 1,
+            "size": "standard-1x"
+          }
+        }
+      }
+    }
   }
 }
