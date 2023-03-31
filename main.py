@@ -2,12 +2,12 @@ import logging
 
 from aiogram.utils import executor
 
-from config import dp
+from config import dp, TOKEN
 from handlers import client
 
 client.register_handlers_client(dp)
 
-
+TOKEN = TOKEN
 
 
 
