@@ -1,7 +1,4 @@
 {
-  "name": "24-1-BOT-master",
-  "version": "1.0.0",
-  "dependencies": {
     "environments": {
       "test": {
         "formation": {
@@ -19,6 +16,6 @@
       }
     }
   }
-}
+
 
 
