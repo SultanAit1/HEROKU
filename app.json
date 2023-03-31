@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "env": {
     "TOKEN": {
-      "descripton": "TOKEN_config_var",
-      "required": true
+      "key": "TOKEN_config_var"
     }
-}
+  }
 }
