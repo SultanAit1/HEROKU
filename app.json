@@ -2,9 +2,17 @@
   "name": "24-1-BOT-master",
   "version": "1.0.0",
   "env": {
-    "SECRET-TOKEN": {
+    "SECRET_TOKEN": {
        "description": "config_var",
+      "generator": "secret",
       "required": true
+    }
+ },
+  "environments": {
+    "test": {
+      "env": {
+        "SECRET_TOKEN": "TOKEN_config_var"
+      }
     }
   }
 }
