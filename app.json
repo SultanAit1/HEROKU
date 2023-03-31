@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "env": {
     "SECRET-TOKEN": {
-       "config_vars": "5651777397:AAHQ_SX6AYfnzfbDQvA5iK_VxCbc4o9gmp0"
+       "description": "TOKEN_config_var",
+      "required": true
     }
   }
 }
