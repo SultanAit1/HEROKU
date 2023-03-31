@@ -2,8 +2,8 @@
   "name": "24-1-BOT-master",
   "version": "1.0.0",
   "env": {
-    "TOKEN": {
-      "key": "TOKEN_config_var"
+    "SECRET-TOKEN": {
+      "description": "TOKEN_config_var"
     }
   }
 }
