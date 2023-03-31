@@ -4,5 +4,6 @@
   "env": {
     "SECRET-TOKEN": {
       "description": "TOKEN_config_var"
-    }}
+    }
+  }
 }
