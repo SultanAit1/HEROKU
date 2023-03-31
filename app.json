@@ -1,12 +1,14 @@
+
 {
   "environments": {
-    "test": "python main.py",
-    "formation": {
-      "quantity": 2,
-      "size": "standard-2x"
+    "test": {
+      "scripts": {
+        "test": "nose test"
+      }
     }
   }
 }
+
 
 
 
