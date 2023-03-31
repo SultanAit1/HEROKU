@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "env": {
     "SECRET-TOKEN": {
-      "description": "TOKEN_config_var"
+      "description": "config_vars"
     }
   }
 }
