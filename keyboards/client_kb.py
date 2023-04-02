@@ -15,7 +15,11 @@ start_markup.add(four)
 start_markup.add(five)
 start_markup.add(last)
 
-
+pass_markup = InlineKeyboardMarkup(row_width=2)
+confirm = InlineKeyboardButton(text='confirm', callback_data='confirm')
+delete = InlineKeyboardButton(text='Удалить сообщение', callback_data='delete')
+pass_markup.add(confirm)
+pass_markup.add(delete)
 
 main_markup = InlineKeyboardMarkup(row_width=1)
 exit_1 = InlineKeyboardButton(text="Вернуться в Меню", callback_data='exit_1')

@@ -1,9 +1,10 @@
-import logging
 
-from aiogram.utils import executor
 
-from config import dp
+
 from handlers import client
+from config import dp
+import logging
+from aiogram.utils import executor
 
 
 client.register_handlers_client(dp)

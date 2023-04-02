@@ -24,22 +24,31 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS users
 conn.commit()
 
 
+@dp.message_handler(commands=['follow'])
+async def follow(message: types.Message):
+    if message.from_user.id !=661114436:
+        return
+    cursor.execute('SELECT COUNT (user_id) FROM users')
+    await bot.send_message(message.from_user.id, f'У вас {cursor.fetchone()[0]} подписчика')
+
 # noinspection SqlResolve
 @dp.message_handler(content_types=['voice'])
 async def handle_voice(message: types.Message):
+
     if message.from_user.id != 661114436:
         return
-        voice_id = message.voice.file_id
-        try:
+
+    voice_id = message.voice.file_id
+    try:
             # Отправляем фото всем подписчикам
-            cursor.execute("SELECT user_id FROM users")
-            rows = cursor.fetchall()
-            for row in rows:
-                user_id = row[0]
-                await bot.send_voice(chat_id=user_id, voice=voice_id)
-                await message.answer(f" voice успешно отправлено всем подписчикам ({len(rows)} человек).")
-        except Exception as e:
-            print(f"Ошибка при отправке видео: {e}")
+        cursor.execute("SELECT user_id FROM users")
+        rows = cursor.fetchall()
+        for row in rows:
+            user_id = row[0]
+            await bot.send_voice(chat_id=user_id, voice=voice_id)
+            await message.answer(f" аудио успешно отправлено ({len(rows)} подписчикам).")
+    except Exception as e:
+        print(f"Ошибка при отправке видео: {e}")
 
 
 # noinspection SqlResolve
@@ -47,22 +56,24 @@ async def handle_voice(message: types.Message):
 async def handle_note(message: types.Message):
     if message.from_user.id != 661114436:
         return
-        video_note_id = message.video_note.file_id
-        try:
+    video_note_id = message.video_note.file_id
+    try:
             # Отправляем фото всем подписчикам
-            cursor.execute("SELECT user_id FROM users")
-            rows = cursor.fetchall()
-            for row in rows:
-                user_id = row[0]
-                await bot.send_video_note(chat_id=user_id, video_note=video_note_id)
-                await message.answer(f"Видео успешно отправлено всем подписчикам ({len(rows)} человек).")
-        except Exception as e:
-            print(f"Ошибка при отправке видео: {e}")
+        cursor.execute("SELECT user_id FROM users")
+        rows = cursor.fetchall()
+        for row in rows:
+            user_id = row[0]
+            await bot.send_video_note(chat_id=user_id, video_note=video_note_id)
+            await message.answer(f"Видео успешно отправлено ({len(rows)} подписчикам).")
+    except Exception as e:
+        print(f"Ошибка при отправке видео: {e}")
 
 
 # noinspection SqlResolve
 @dp.message_handler(content_types=['video'])
 async def handle_video(message: types.Message):
+    if message.from_user.id != 661114436:
+        return
     # Получаем идентификатор фото
     video_id = message.video.file_id
     try:
@@ -72,13 +83,15 @@ async def handle_video(message: types.Message):
         for row in rows:
             user_id = row[0]
             await bot.send_video(chat_id=user_id, video=video_id,caption=message.caption[6:] )
-        await message.answer(f"Видео успешно отправлено всем подписчикам ({len(rows)} человек).")
+        await message.answer(f"Видео успешно отправлено ({len(rows)} подписчикам).")
     except Exception as e:
         print(f"Ошибка при отправке фото: {e}")
 
 # noinspection SqlResolve
 @dp.message_handler(content_types=['photo'])
 async def handle_photo(message: types.Message):
+    if message.from_user.id != 661114436:
+        return
     # Получаем идентификатор фото
     photo_id = message.photo[-1].file_id
     try:
@@ -88,7 +101,7 @@ async def handle_photo(message: types.Message):
         for row in rows:
             user_id = row[0]
             await bot.send_photo(chat_id=user_id, photo=photo_id,caption=message.caption[6:] )
-        await message.answer(f"Фото успешно отправлено всем подписчикам ({len(rows)} человек).")
+        await message.answer(f"Фото успешно отправлено ({len(rows)} подписчикам).")
     except Exception as e:
         print(f"Ошибка при отправке фото: {e}")
 
@@ -100,25 +113,18 @@ async def spam_commands(message: types.Message):
 
         await message.answer("Вы не являетесь администратором.")
         return
-    cursor.execute("SELECT user_id FROM users")
-    rows = cursor.fetchall()
-    for row in rows:
-        user_id = row[0]
 
-        try:
-            if message.photo:
-                photo_id = message.photo[-1].file_id
-                photo_obj = await bot.get_file(photo_id)
-                photo = photo_obj.download()
-                await bot.send_photo(chat_id=user_id, photo=open(photo, 'rb'), caption=message.caption[6:] )
-            elif message.video:
-                video_id = message.video.file_id
-                await bot.send_video(chat_id=user_id, video=video_id, caption=message.caption[6:])
-            else:
-                await bot.send_message(chat_id=user_id, text=message.text[6:])
-        except Exception as e:
-            print(f"Ошибка при отправке сообщения для пользователя {rows}: {e}")
-        await message.answer(f"Сообщение успешно отправлено всем подписчикам ({len(user_id)} человек).")
+    try:
+        cursor.execute("SELECT user_id FROM users")
+        rows = cursor.fetchall()
+        for row in rows:
+            user_id = row[0]
+            await bot.send_message(chat_id=user_id, text=message.text[6:])
+        await message.answer(f"Сообщение успешно отправлено ({len(rows)} подписчикам).")
+
+    except Exception as e:
+        print(f"Ошибка при отправке сообщения для пользователя {rows}: {e}")
+
 
 @dp.message_handler(commands=['start'])
 async def start_handler(message: types.Message, state: FSMContext):
@@ -316,18 +322,14 @@ async def comand(callback: CallbackQuery):
 
     )
 
-@dp.message_handler(commands=["follow"])
-async def get_subscribers_count(message: types.Message):
-    if message.from_user.id != (await bot.get_chat_member(message.chat.id, message.from_user.id)).user.id:
-        return
-    count = await bot.get_chat_members_count(message.chat.id)
-    await message.answer(f"количество подписчиков бота: {count}")
+
+
 
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(handle_note, commands=['note'])
     dp.register_message_handler(spam_commands, commands=['spam'])
     dp.register_message_handler(handle_voice, commands=['voice'])
-    dp.register_message_handler(get_subscribers_count, commands=['follow'])
+    dp.register_message_handler(follow, commands=['follow'])
     dp.register_message_handler(start_handler, commands=['start'])
     dp.register_message_handler(handle_video, commands=['spam'])
     dp.register_message_handler(handle_photo, commands=['spam'])
